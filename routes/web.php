@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,4 @@ Route::get('/check-user', [\App\Http\Controllers\UserController::class,'showChec
 Route::post('/check-user', [\App\Http\Controllers\UserController::class,'checkUser']);
 
 require __DIR__.'/auth.php';
+Route::post('/clear-session', [AuthenticatedSessionController::class, 'clearSession']);

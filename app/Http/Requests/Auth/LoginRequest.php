@@ -2,12 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Models\User;
-use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -25,12 +22,12 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array
      */
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'username' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -44,19 +41,22 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        // Wysyłanie żądania do zewnętrznego API
-        $response = Http::post('https://petstore.swagger.io/v2/user/login', [
-            'username' => $this->username,
-            'password' => $this->password,
-        ]);
+        try {
+            $response = Http::post('https://petstore.swagger.io/v2/user/login', [
+                'username' => $this->input('email'),
+                'password' => $this->input('password'),
+            ]);
+
+            Log::info('API Response:', [$response->json()]);
+        } catch (\Exception $e) {
+            Log::error('API Request failed:', ['error' => $e->getMessage()]);
+        }
+
 
         if ($response->successful()) {
-            // Tutaj logika, która zdecyduje, czy użytkownik zostanie zalogowany
-            // Może to być np. sprawdzenie tokena lub innego identyfikatora sesji
-
-            // Jeśli logowanie jest udane, ręcznie zaloguj użytkownika w Laravel
-            $user = $this->findOrCreateUser($response->json());
-            Auth::login($user);
+            // Zakładając, że odpowiedź zawiera token sesji lub podobny identyfikator
+            $sessionToken = $response->json('message');
+            session(['api_session_token' => $sessionToken]);
 
             RateLimiter::clear($this->throttleKey());
         } else {
@@ -67,14 +67,6 @@ class LoginRequest extends FormRequest
             ]);
         }
     }
-    protected function findOrCreateUser($userData)
-    {
-        // Zakładając, że $userData zawiera 'email' i inne potrzebne dane
-        $user = User::where('email', $userData['email'])->first();
-
-
-        return $user;
-    }
 
     /**
      * Ensure the login request is not rate limited.
@@ -83,7 +75,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -104,6 +96,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
     }
 }
