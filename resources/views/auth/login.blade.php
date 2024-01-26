@@ -9,6 +9,11 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <!-- Email Address -->
                 <div>
                     <x-input-label for="username" :value="__('username')" />

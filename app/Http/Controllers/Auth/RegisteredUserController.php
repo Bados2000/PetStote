@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
             'username' => 'required|string|max:255',
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|max:255',
             'password' => 'required|string|min:6',
             'phone' => 'required|string|max:255',
         ]);
@@ -49,9 +49,9 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($response->successful()) {
-            return redirect('/');
+            return redirect('/login')->with('success', 'Rejestracja przebiegła pomyślnie, możesz się zalogować.');
         } else {
-            return back()->withErrors(['msg' => 'Problem z rejestracją w serwisie zewnętrznym.']);
+            return redirect('/register')->with('success', "Niepoprawnie uzupełniony formularz.");
         }
     }
 

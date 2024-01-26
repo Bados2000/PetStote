@@ -52,9 +52,8 @@ class AuthenticatedSessionController extends Controller
             }
         }
 
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
+        return redirect('/login')->with('success', "Niepoprawne dane użytkownika");
+
     }
 
 
@@ -70,7 +69,9 @@ class AuthenticatedSessionController extends Controller
 
         // Usunięcie danych sesji
 
-        $request->session()->flush();
+        $request->session()->forget('user_session_token');
+        $request->session()->forget('session_expires_at');
+        $request->session()->forget('user_name');
         Log::info('Session data FYK:', $request->session()->all());
 
         return redirect('/');

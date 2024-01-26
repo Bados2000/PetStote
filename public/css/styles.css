@@ -1,3 +1,14 @@
+.custom-guest-layout {
+    background-color: #f0f0f0;
+    padding-bottom: 120px !important;
+    /* Dodaj inne style według potrzeb */
+}
+.min-h-screen {
+    min-height: auto !important;
+}
+.container .sm\:justify-center {
+    justify-content: start;
+}
 .form-container {
     background-color: #f8f9fa;
     border: 1px solid #ddd;

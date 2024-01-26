@@ -19,17 +19,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             @if(session('user_name'))
-                <div>
-                    <span>{{ session('user_name') }}</span>
+                <div style="display: flex; flex-direction: row" >
+                    <span style="display: flex; align-items: center; justify-content: center;">{{ session('user_name') }}</span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="link-style-button">Wyloguj</button>
+                        <button type="submit" style="float: left; margin-left: 10px; background-color: #007bff !important;" class="btn btn-primary btn-primary-sign">Wyloguj</button>
                     </form>
+                    <div style="clear: both;"></div>
+                </div>
+            @else
+                <div>
+                    <a class="btn btn-primary btn-primary-login" href="{{ route('login') }}">Zaloguj się</a>
+                    <a class="btn btn-primary btn-primary-sign" href="{{ route('register') }}">Utwórz konto</a>
                 </div>
 
-            @else
-                <a class="btn btn-primary btn-primary-login" href="{{ route('login') }}">Zaloguj się</a>
-                <a class="btn btn-primary btn-primary-sign" href="{{ route('register') }}">Utwórz konto</a>
             @endif
         </div>
     </div>

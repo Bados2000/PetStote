@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\PetStore\PetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,7 @@ Route::post('/check-user', [\App\Http\Controllers\UserController::class,'checkUs
 
 require __DIR__.'/auth.php';
 Route::post('/clear-session', [AuthenticatedSessionController::class, 'clearSession']);
+Route::post('/petstore/create', [PetController::class, 'createPet']);
+Route::get('/petstore/showPet', [PetController::class, 'showPet'])->name('petstore.showPet');
+Route::delete('/petstore/delete', [PetController::class, 'deletePet'])->name('petstore.deletePet');
+Route::put('/petstore/updatePet', [PetController::class, 'updatePet'])->name('petstore.updatePet');
