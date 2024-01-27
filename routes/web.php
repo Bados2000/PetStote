@@ -38,3 +38,4 @@ Route::post('/petstore/create', [PetController::class, 'createPet']);
 Route::get('/petstore/showPet', [PetController::class, 'showPet'])->name('petstore.showPet');
 Route::delete('/petstore/delete', [PetController::class, 'deletePet'])->name('petstore.deletePet');
 Route::put('/petstore/updatePet', [PetController::class, 'updatePet'])->name('petstore.updatePet');
+Route::post('/petstore/updatePet2', [PetController::class, 'updatePet2'])->name('petstore.updatePet2');

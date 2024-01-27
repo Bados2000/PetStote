@@ -159,5 +159,34 @@ class PetController extends Controller
         return redirect('/')->with('success4', $errorMessage);
 
     }
+    public function updatePet2(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        $petId = $request->input('petId');
+        $data = [
+            'name' => $request->input('name'),
+            'status' => $request->input('status'),
+        ];
+
+        // Użyj Http::asJson() do wysłania żądania jako JSON
+        $response = Http::asForm()->post("https://petstore.swagger.io/v2/pet/{$petId}", $data);
+
+        switch ($response->status()) {
+            case 200:
+                $errorMessage = 'Zwierzak został zaktualizowany.';
+                break;
+            case 404:
+                $errorMessage = 'Zwierzak nie został znaleziony.';
+                break;
+            case 405:
+                $errorMessage = 'Błąd walidacji.';
+                break;
+            default:
+                $errorMessage = 'Nieznany błąd: ' . $response->status();
+                break;
+        }
+
+        return redirect('/')->with('success5', $errorMessage);
+    }
+
 }
 
