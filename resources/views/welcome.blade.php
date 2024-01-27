@@ -28,38 +28,38 @@
 
                     <div>
                         <x-input-label for="id" :value="__('Id zwierzaka')" />
-                        <x-text-input id="id" class="block mt-1 w-full" type="number"  name="id" :value="old('id','125')" required autofocus autocomplete="id" />
+                        <x-text-input id="id" class="block mt-1 w-full" type="number"  name="id" :value="old('id')" required autofocus autocomplete="id" />
                         <x-input-error :messages="$errors->get('id')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="name" :value="__('Nazwa Zwierzaka')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name','Pies Antoni')" required autofocus autocomplete="name" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="category[id]" :value="__('Id kategorii')" />
-                        <x-text-input id="category[id]" class="block mt-1 w-full" type="number"  name="category[id]" :value="old('category[id]','23')" required autofocus autocomplete="category[id]" />
+                        <x-text-input id="category[id]" class="block mt-1 w-full" type="number"  name="category[id]" :value="old('category[id]')" required autofocus autocomplete="category[id]" />
                         <x-input-error :messages="$errors->get('category[id]')" class="mt-2" />
                     </div>
 
                     <div>
                         <x-input-label for="category[name]" :value="__('Nazwa kategorii')" />
-                        <x-text-input id="category[name]" class="block mt-1 w-full" type="text" name="category[name]" :value="old('category[name]','Domowy')" required autofocus autocomplete="category[name]" />
+                        <x-text-input id="category[name]" class="block mt-1 w-full" type="text" name="category[name]" :value="old('category[name]')" required autofocus autocomplete="category[name]" />
                         <x-input-error :messages="$errors->get('category[name]')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="photoUrls" :value="__('Url zdjęcia')" />
-                        <x-text-input id="photoUrls" class="block mt-1 w-full" type="text" name="photoUrls" :value="old('photoUrls','https://example.com/photos/pet1.jpg')" required autofocus autocomplete="photoUrls" />
+                        <x-text-input id="photoUrls" class="block mt-1 w-full" type="text" name="photoUrls" :value="old('photoUrls')" required autofocus autocomplete="photoUrls" />
                         <x-input-error :messages="$errors->get('photoUrls')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="tags[id]" :value="__('Id tagu')" />
-                        <x-text-input id="tags[id]" class="block mt-1 w-full" type="number" name="tags[id]" :value="old('tags[id]','221')" required autofocus autocomplete="tags[id]" />
+                        <x-text-input id="tags[id]" class="block mt-1 w-full" type="number" name="tags[id]" :value="old('tags[id]')" required autofocus autocomplete="tags[id]" />
                         <x-input-error :messages="$errors->get('tags[id]')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="tags[name]" :value="__('Nazwa tagu')" />
-                        <x-text-input id="tags[name]" class="block mt-1 w-full" type="text" name="tags[name]" :value="old('tags[name]','Jakis tag')" required autofocus autocomplete="tags[id]" />
+                        <x-text-input id="tags[name]" class="block mt-1 w-full" type="text" name="tags[name]" :value="old('tags[name]')" required autofocus autocomplete="tags[id]" />
                         <x-input-error :messages="$errors->get('tags[name]')" class="mt-2" />
                     </div>
                     <div>
@@ -95,7 +95,7 @@
                     @endif
                     <div>
                         <x-input-label for="petId" :value="__('Id zwierzaka')" />
-                        <x-text-input id="id" class="block mt-1 w-full" type="number"  name="petId" :value="old('petId','125')" required autofocus autocomplete="petId" />
+                        <x-text-input id="id" class="block mt-1 w-full" type="number"  name="petId" :value="old('petId')" required autofocus autocomplete="petId" />
                         <x-input-error :messages="$errors->get('petId')" class="mt-2" />
                     </div>
 
@@ -228,7 +228,7 @@
                         @endif
                         <div>
                             <x-input-label for="petId" :value="__('Id zwierzaka')" />
-                            <x-text-input id="id" class="block mt-1 w-full" type="number"  name="petId" :value="old('petId','125')" required autofocus autocomplete="petId" />
+                            <x-text-input id="id" class="block mt-1 w-full" type="number"  name="petId" :value="old('petId')" required autofocus autocomplete="petId" />
                             <x-input-error :messages="$errors->get('petId')" class="mt-2" />
                         </div>
 
