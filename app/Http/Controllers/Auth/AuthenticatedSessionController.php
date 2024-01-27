@@ -63,8 +63,7 @@ class AuthenticatedSessionController extends Controller
         Log::info('Session data BYK:', $request->session()->all());
 
         // Wysłanie żądania do API aby wylogować użytkownika
-        Http::post('https://petstore.swagger.io/v2/user/logout', [
-            'session_token' => $sessionToken,
+        Http::get('https://petstore.swagger.io/v2/user/logout', [
         ]);
 
         // Usunięcie danych sesji
